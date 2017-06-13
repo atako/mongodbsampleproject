@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const PostSchema = require('./post');
+const Schema = mongoose.Schema;
+
 const UserSchema = new Schema ({
     name: {
       type: String,
@@ -11,7 +12,11 @@ const UserSchema = new Schema ({
       required: [true, 'Name is required.']
     },
     posts: [PostSchema],
-    likes: Number
+    likes: Number,
+    blogPosts: [{
+      type: Schema.Types.ObjectId,
+      ref: 'blogPost'
+    }]
 });
 
 UserSchema.virtual('postCount').get(function() {
